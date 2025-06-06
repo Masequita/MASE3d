@@ -6,13 +6,6 @@
     <title>3DMASE</title>
     <meta name="description" content="Página web Cafetería">
 
-    <!-- Prefetch -->
-    <link rel="prefetch" href="nosotros.php" as="document">
-
-    <!-- Preload -->
-    <link rel="preload" href="css/normalize.css" as="style">
-    <link rel="stylesheet" href="css/normalize.css">
-
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap"  crossorigin="crossorigin" as="font">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
     
@@ -29,13 +22,12 @@
                 <h1 class="logo_nombre no-margin centrar-texto">3D<span class="logo_bold">MASE</span></h1>                </a>
 
                 <nav class="navegacion">
+                    <a href="index.php" class="navegacion__enlace">Inicio</a>
                     <a href="nosotros.php" class="navegacion__enlace">Nosotros</a>
-                    <a href="cursos.php" class="navegacion__enlace">Cursos</a>
                     <a href="contacto.php" class="navegacion__enlace">Contacto</a>
                 </nav>
             </div>
         </div>
-
         <div class="header__texto">
             <h2 class="no-margin">De lo Digital a lo Real</h2>
             <p class="no-margin">Transformamos tus archivos 3D en objetos físicos listos para usar o exhibir.</p>
@@ -45,9 +37,6 @@
     <div class="contenedor contenido-principal">
         <main class="blog">
             <h3>Nuestra tienda</h3>
-            <?php 
-            include ("productos.php");
-          ?>
 
             <article class="entrada">
                 <div class="entrada__imagen">
@@ -98,7 +87,6 @@
                     <a href="Racoon.php" class="boton boton--primario">Mas Informacion</a>
                 </div>
             </article>
-
         </main>
         <aside class="sidebar">
             <h3>Nuestros Cursos y Talleres</h3>
@@ -128,6 +116,7 @@
             </ul>
         </aside>
     </div>
+
 
     <footer class="footer">
         <div class="contenedor">
