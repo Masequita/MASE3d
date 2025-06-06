@@ -37,7 +37,9 @@
     <div class="contenedor contenido-principal">
         <main class="blog">
             <h3>Nuestra tienda</h3>
-
+                        <?php 
+            include ("productos.php");
+          ?>
             <article class="entrada">
                 <div class="entrada__imagen">
                     <picture >
