@@ -1,179 +1,139 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3DMASE</title>
     <meta name="description" content="Página web Cafetería">
 
-    <!-- Prefetch -->
-    <link rel="prefetch" href="nosotros.php" as="document">
-
-    <!-- Preload -->
-    <link rel="preload" href="css/normalize.css" as="style">
-    <link rel="stylesheet" href="css/normalize.css">
-
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap"  crossorigin="crossorigin" as="font">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- Bootstrap primero -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Tus estilos después -->
-<link href="../css/estilos.css" rel="stylesheet">
-
-  </head>
-  <body>
-    <div class="c-salir-btn">
-              <a type="button" class="btn btn-primary btn-lg c-salir-bnt" href="../index.php">
-          <i class="fa fa-refresh"></i>
-          Regresar al menu
-        </a>
-</div>
-  <div class="col-md-12">
-        <!--
-          primary = azul, accion
-          secondary = gris, cualquier cosa
-          warning = amarillo, editar o modificar
-          danger = rojo, eliminar
-          success= verde, agregar
-        -->
-    </div>
-    <div class="container">
-    <h1 class="text-center">Sistema de Control de Productos</h1>
-    <div class="row">
-      <div class="col-md-12">
-        <!--
-          primary = azul, accion
-          secondary = gris, cualquier cosa
-          warning = amarillo, editar o modificar
-          danger = rojo, eliminar
-          success= verde, agregar
-        -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#productoModal">
-          Agregar Producto
-        </button>
-      </div>
-    </div>
     
-<!-- Modal agregar empleado  -->
-<div class="modal fade" id="productoModal" tabindex="-1" role="dialog" aria-labelledby="productoModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="productoModalLabel">Agregar Producto</h5>
+    <link rel="preload" href="css/estilos.css" as="style">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
 
-        <div class="row">
-      <div class="col-md-12">
-        <!--
-          primary = azul, accion
-          secondary = gris, cualquier cosa
-          warning = amarillo, editar o modificar
-          danger = rojo, eliminar
-          success= verde, agregar
-        -->
-        <a type="button" class="btn btn-primary" href="index.php">
-          <i class="fa fa-refresh"></i>
-          Regresar al menu
-        </a>
-      </div>
-    </div>
+    <header class="header">
 
-      </div>
-      <div class="modal-body">
-<form id="FormAgregarProducto" enctype="multipart/form-data">
-          <div class="form-group">
-            <Label for="nombre">Nombre</Label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
-          </div>
-          <div class="form-group">
-          <Label for="descripcion_corta">Descripcion Corta</Label>
-            <input type="text" class="form-control" id="descripcion_corta" name="descripcion_corta" required>
-          </div>
-          <div class="form-group">
-            <label for="descripcion_larga">Descripcion Larga</label>
-            <input type="text" class="form-control" id="descripcion_larga" name="descripcion_larga" required>
-          </div>
-          <div class="form-group">
-          <label for="precio">Precio</label>
-          <input type="text" class="form-control" id="precio" name="precio" required>
-          </div>
-          <div class="form-group">
-          <label for="cantidad">Cantidad</label>
-          <input type="cantidad" class="form-control" id="cantidad" name="cantidad" required>
-          </div>
-          <div class="form-group">
-          <label for="inputImagen">Imagen</label>
-          <input type="file" class="form-control" id="inputImagen" name="imagen" required>
-          </div>
-          <button type="submit" class="btn btn-success">Agregar</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-      <div class="row">
-          <div class="col-md-12">
-            <h2 class="text-center">Lista de Productos</h2>
-          </div>
-          </div>
-          <br>
-          <hr>
-          <?php 
-            include ("productos.php");
-          ?>
-          
-          <script>
-              document.addEventListener("DOMContentLoaded", function () {
-              document.getElementById("FormAgregarProducto").addEventListener('submit',function (event){
-                event.preventDefault(); // Prevent the default form submission
-                
-                //Gather form data
-                const formData = new FormData(this);
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.php">
+                <h1 class="logo_nombre no-margin centrar-texto">3D<span class="logo_bold">MASE</span></h1>                </a>
 
-                // Send data to the server using AJAX
-                fetch('acciones/agregar_productos.php',{
-                  method: 'POST',
-                  body: formData
-                })
-                .then(response => response.json())
-                .then(data =>{
-                if(data.success){
-                  Swal.fire({
-                  icon: 'success',
-                  title: "¡Éxito!",
-                  text: 'Producto agregado correctamente.'
-                }).then(() => {
-                  // Cerrar el modal después de confirmar
-                  $('#productoModal').modal('hide');
-                  // Recargar la página
-                  location.reload();
-                });
-              }else{
-                Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Ocurrió un error al agregar el producto.'
-             });
-            }
-          })
-          .catch(error =>{
-          console.error('Error:', error);
-          Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Ocurrió un error al agregar el producto:'
-        });
-      });
-    });
-  });
-          </script>
+                <nav class="navegacion">
+                    <a href="index.php" class="navegacion__enlace">Inicio</a>
+                    <a href="nosotros.php" class="navegacion__enlace">Nosotros</a>
+                    <a href="contacto.php" class="navegacion__enlace">Contacto</a>
+                </nav>
+            </div>
         </div>
-        </body>
-        <script src="assets/js/sweetalert2.min.js"></script>
-        <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+        <div class="header__texto">
+            <h2 class="no-margin">De lo Digital a lo Real</h2>
+            <p class="no-margin">Transformamos tus archivos 3D en objetos físicos listos para usar o exhibir.</p>
+        </div>
+    </header>
 
+    <div class="contenedor contenido-principal">
+        <main class="blog">
+            <h3>Nuestra tienda</h3>
+
+            <article class="entrada">
+                <div class="entrada__imagen">
+                    <picture >
+                        <source loading="lazy"  srcset="img/blog1.webp" type="image/webp">
+                        <img loading="lazy" src="img/blog1.jpg" alt="imagen blog" class="producto"> 
+                    </picture>
+                </div>
+
+                <div class="entrada__contenido">
+                    <h4 class="no-margin ">Charmander</h4>
+                    <p>
+                        Con su cuerpo anaranjado, ojos expresivos y la icónica llama que arde constantemente en la punta de su cola, Charmander es uno de los Pokémon más queridos y reconocibles desde los inicios de la franquicia. Este Pokémon de tipo fuego no solo es adorable a la vista, sino que también representa determinación, coraje y el comienzo de una gran aventura para muchos entrenadores.
+                    </p>
+                    <a href="Charmander.php" class="boton boton--primario">Mas Información</a>
+                </div>
+            </article>
+
+            <article class="entrada">
+                <div class="entrada__imagen">
+                    <picture>
+                        <source loading="lazy"  srcset="img/blog2.webp" type="image/webp">
+                        <img loading="lazy" src="img/blog2.jpg" alt="imagen blog "class="producto"> 
+                    </picture>
+                </div>
+
+                <div class="entrada__contenido">
+                    <h4 class="no-margin">Flexible Deer Chef</h4>
+                    <p>
+¡Un ciervo chef único! Con cuerpo flexible, puedes ponerlo en cualquier postura mientras prepara deliciosos platos. </p>
+                    <a href="Deer.php" class="boton boton--primario">Mas Informacion</a>
+                </div>
+            </article>
+
+            <article class="entrada">
+                <div class="entrada__imagen">
+                    <picture>
+                        <source loading="lazy"  srcset="img/blog3.webp" type="image/webp">
+                        <img loading="lazy" src="img/blog3.jpg" alt="imagen blog" class="producto"> 
+                    </picture>
+                </div>
+
+                <div class="entrada__contenido">
+                    <h4 class="no-margin">Raccoon Flexi</h4>
+                    <p>
+        Un mapache juguetón y totalmente articulable, ¡perfecto para crear poses y divertidas aventuras!
+                    </p>
+                    <a href="Racoon.php" class="boton boton--primario">Mas Informacion</a>
+                </div>
+            </article>
+        </main>
+        <aside class="sidebar">
+            <h3>Nuestros Cursos y Talleres</h3>
+
+            <ul class="cursos no-padding">
+                <li class="widget-curso">
+                    <h4 class="no-margin">Impresion 3D</h4>
+                    <p class="widget-curso__label">Precio: 
+                        <span class="widget-curso__info">Gratis</span>
+                    </p>
+                    <p class="widget-curso__label">Cupo: 
+                        <span class="widget-curso__info">20</span>
+                    </p>
+                    <a href="curso1.php" class="boton boton--secundario">Más Información sobre nuestros cursos</a>
+                </li>
+
+                <li class="widget-curso">
+                    <h4 class="no-margin">Pintado de figuras impresas</h4>
+                    <p class="widget-curso__label">Precio: 
+                        <span class="widget-curso__info">Gratis</span>
+                    </p>
+                    <p class="widget-curso__label">Cupo: 
+                        <span class="widget-curso__info">20</span>
+                    </p>
+                    <a href="curso2.php" class="boton boton--secundario">Más Información sobre nuestros cursos</a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+
+    <footer class="footer">
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.php">
+                <h1 class="logo_nombre no-margin centrar-texto">3D<span class="logo_bold">MASE</span></h1>                </a>
+                </a>
+
+                <nav class="navegacion">
+                    <a href="nosotros.php" class="navegacion__enlace">Nosotros</a>
+                    <a href="cursos.php" class="navegacion__enlace">Cursos</a>
+                    <a href="contacto.php" class="navegacion__enlace">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/modernizr.js"></script>
+</body>
 </html>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
