@@ -1,0 +1,24 @@
+.container {
+    background-color: #ffffff !important;
+    padding: 20px;
+    border-radius: 10px;
+}
+.imagen_empleados_en_tabla {
+    width: 50px;/* 50% del ancho */
+    height: 50px; /* 50% del alto */
+    border-radius: 50% ;
+    object-fit: cover;margin: 0 auto;
+    display: block;
+}
+hr {
+    height: 0.1px !important;
+    width: 50% !important;
+    background-color: blue !important;
+}
+thead tr th {
+    text-align: center;
+}
+tr td {
+    text-align: center;
+}
+
